@@ -11,7 +11,7 @@ mvn clean package
 
 ## Deployment
 
-* Update `$ZEPPELIN_HOME/conf/zeppeln-site.xml`
+* Update `$ZEPPELIN_HOME/conf/zeppelin-site.xml`
 ```xml
 <property>
   <name>zeppelin.interpreters</name>
@@ -19,7 +19,7 @@ mvn clean package
 </property>
 ```
 * Create `$ZEPPELIN_HOME/interpreter/mongodb`
-* Copy interpreter jar in `$ZEPPELIN_HOME/interpreter/mongodb`
+* Copy interpreter jar zeppelin-mongodb-<version)-jar-with-dependencies.jar in `$ZEPPELIN_HOME/interpreter/mongodb`
 
 
 ## Configuration
@@ -80,5 +80,3 @@ states.forEach(state => { print(state._id + "\t" + state.totalPop) })
 
 * Queries (these examples come from: https://docs.mongodb.com/manual/tutorial/aggregation-zip-code-data-set/)
 ![Examples](docs/zeppelin-mongo-examples.png)
-
-
