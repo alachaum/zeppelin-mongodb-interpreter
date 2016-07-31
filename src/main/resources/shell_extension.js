@@ -1,5 +1,30 @@
 var _ZEPPELIN_TABLE_LIMIT_ = __ZEPPELIN_TABLE_LIMIT__;
 
+function flattenObject(obj, flattenArray) {
+    var toReturn = {};
+
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+
+        //if ((typeof obj[i]) == 'object') {
+        if (toString.call( obj[i] ) === '[object Object]' ||
+            toString.call( obj[i] ) === '[object BSON]' ||
+          (flattenArray && toString.call( obj[i] ) === '[object Array]')) {
+            var flatObject = flattenObject(obj[i]);
+            for (var x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+
+                toReturn[i + '.' + x] = flatObject[x];
+            }
+        } else if (toString.call( obj[i] ) === '[object Array]') {
+            toReturn[i] = tojson(obj[i], null, true);
+        } else {
+            toReturn[i] = obj[i];
+        }
+    }
+    return toReturn;
+}
+
 function printTable(dbquery, fields, flattenArray) {
 
     var iterator = dbquery;
